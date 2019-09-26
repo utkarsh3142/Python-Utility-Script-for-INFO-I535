@@ -2,6 +2,7 @@
 ### The script is distributed under the GPL 3.0 license (http://www.gnu.org/licenses/gpl-3.0.html)
 ### You are free to run, study, share and modify this script.
 
+# Libraries/dependecies import
 import logging
 import os
 import sys
@@ -272,40 +273,6 @@ class utilities():
 
 
                 return error_flag
-
-        def transform_(self,columns,chunksize):
-                """
-                Function to transform the data from CSV into JSON after selecting
-                the user input columns.
-                Input: Comma separated list of columns
-                Output: Error code / Transformed data saved into extraction folder
-                """
-
-                logger.info("*********************************************************************")
-                logger.info("*************** Beginning transform data module *********************")
-                logger.info("*********************************************************************")
-
-                error_flag = 0
-
-                files_list = os.listdir(self.extract_dir)
-
-                if columns:
-                        columns = columns.split(',')
-
-                for file_ in files_list:
-
-                        if file_.endswith(".csv"):
-
-                                logging.info("Transforming file " + file_)
-                                file_path = self.extract_dir + file_
-
-                                csvfile = open(file_path, 'r')
-                                jsonfile = open(self.extract_dir + file_ + '.json', 'w')
-
-                                reader = csv.DictReader( csvfile, columns)
-                                for row in reader:
-                                        json.dump(row, jsonfile)
-                                        jsonfile.write('\n')
 
         def load(self, hostname, port, db, username, password, collection):
                 """
